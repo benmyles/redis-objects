@@ -19,6 +19,13 @@ class Redis
       @options = options
     end
     
+    # Works like add. Can chain together: list << 'a' << 'b'
+    # Will use the current time as the score.
+    def <<(value)
+      add(value)
+      self  # for << 'a' << 'b'
+    end
+    
     # Add the specified value to the set only if it does not exist already.
     # Redis: ZADD
     def add(value, score=Time.now.utc.to_f)
@@ -30,6 +37,7 @@ class Redis
       from_redis range(0, -1)
     end
     alias_method :get, :values
+    alias_method :members, :values
 
     # Same functionality as Ruby arrays.  If a single number is given, return
     # just the element at that index using Redis: ZRANGE. Otherwise, return
