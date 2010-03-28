@@ -1,9 +1,8 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 require 'redis/sorted_set'
-require 'redis/set'
 
-describe Redis::Set do
+describe Redis::SortedSet do
   before :all do
     @sorted_set = Redis::SortedSet.new('spec/sorted_set')
     @sorted_set_1 = Redis::SortedSet.new('spec/sorted_set_1')
