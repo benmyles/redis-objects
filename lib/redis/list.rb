@@ -82,6 +82,10 @@ class Redis
     def range(start_index, end_index)
       from_redis redis.lrange(key, start_index, end_index)
     end
+    
+    def trim(start_index, end_index)
+      redis.ltrim(key, start_index, end_index)
+    end
 
     # Return the value at the given index. Can also use familiar list[index] syntax.
     # Redis: LINDEX

@@ -57,6 +57,13 @@ class Redis
     def range(start_index, end_index)
       from_redis redis.zrange(key, start_index, end_index)
     end
+    
+    # range_by_score(1000,2000,)
+    def range_by_score(min, max, count=nil, offset=0)
+      opts = [min, max]
+      opts << ["LIMIT",offset,count] if count && offset
+      from_redis redis.zrangebyscore(opts)
+    end
 
     # Return the value at the given index. Can also use familiar list[index] syntax.
     # Redis: ZRANGE
